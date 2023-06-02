@@ -1,4 +1,5 @@
 # spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.1,org.mongodb.spark:mongo-spark-connector_2.12:10.1.1 spark_odbierz_dane.py
+# spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.1 spark_odbierz_dane.py
 
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as f
@@ -44,8 +45,8 @@ if __name__ == "__main__":
     # defining output to csv
     query = parsed.writeStream.outputMode("append")\
         .format("parquet")\
-        .option("path", "wynik.parquet")\
-        .option("checkpointLocation", "/tmp/pyspark/")\
+        .option("path", "wyniki")\
+        .option("checkpointLocation", "wyniki/_spark_metadata/")\
         .start()
     query.awaitTermination()
     query.stop()
