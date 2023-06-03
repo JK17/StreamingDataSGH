@@ -1,4 +1,3 @@
-# spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.1,org.mongodb.spark:mongo-spark-connector_2.12:10.1.1 spark_odbierz_dane.py
 # spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.1 spark_odbierz_dane.py
 
 from pyspark.sql import SparkSession
@@ -50,21 +49,5 @@ if __name__ == "__main__":
         .option("path", "wyniki")\
         .option("checkpointLocation", "wyniki/_spark_metadata/")\
         .start()
-    query.awaitTermination()
-    query.stop()
-
-    # defining output
-    # query = parsed.writeStream.outputMode("append").format("console").start()
-    # query.awaitTermination()
-    # query.stop()
-
-    # #tryWithMongo
-    # query = parsed.writeStream.outputMode("append").format("mongodb")\
-    # .option("checkpointLocation", "/tmp/pyspark/")\
-    # .option("forceDeleteTempCheckpointLocation", "true")\
-    # .option("spark.mongodb.connection.uri", "mongodb://localhost:27017/")\
-    # .option("spark.mongodb.database","jk_test")\
-    # .option("spark.mongodb.collection", "data_from_spark").start()
-
     query.awaitTermination()
     query.stop()
