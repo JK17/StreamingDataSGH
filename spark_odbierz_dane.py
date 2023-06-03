@@ -12,6 +12,8 @@ from pyspark.sql.types import (
 
 if __name__ == "__main__":
     
+    TOPIC = "test2"
+    
     spark = SparkSession.builder.appName("stream").getOrCreate()
     spark.sparkContext.setLogLevel("ERROR")
 
@@ -29,7 +31,7 @@ if __name__ == "__main__":
     raw = (
         spark.readStream.format("kafka")
         .option("kafka.bootstrap.servers", "broker:9092")
-        .option("subscribe", "test2")
+        .option("subscribe", TOPIC)
         .load()
     )
     

@@ -13,6 +13,7 @@ import socket
 import numpy as np
 
 TOPIC = "test2"
+
 def prepare_temperature():
     number_of_points = 100
     center = 60
